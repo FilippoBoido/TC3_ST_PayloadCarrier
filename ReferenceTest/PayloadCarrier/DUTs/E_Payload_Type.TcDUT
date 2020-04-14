@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="E_Payload_Type" Id="{0a0887d1-1dfe-4f14-b27b-0145f54e5547}">
+    <Declaration><![CDATA[
+TYPE E_Payload_Type :
+(
+	NO_PAYLOAD := 0,
+	PAYLOAD_A,
+	PAYLOAD_B,
+	PAYLOAD_TYPE_SIZE
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

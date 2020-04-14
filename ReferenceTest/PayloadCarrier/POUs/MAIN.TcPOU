@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="MAIN" Id="{6ebdcdb5-2ed2-420e-97ac-78bc266c18cf}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	
+	fbPayloadA : Payload_A;
+	fbPayloadB : Payload_B;
+	fbPayloadCarrier : Payload_Carrier;
+	rPayloadAReceiver : REFERENCE TO Payload_A;
+	pPayloadAReceiver : POINTER TO Payload_A;
+	fbPayloadAReceiver : Payload_A;
+	pPayloadBReceiver : POINTER TO Payload_B;
+	
+	step : INT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbPayloadCarrier();
+fbPayloadA();
+fbPayloadB();
+
+CASE step OF
+	
+	1:
+		IF 	fbPayloadCarrier.SetPayload(fbPayloadA,PAYLOAD_A)
+			THEN
+			
+			step := 2;
+		END_IF
+		
+	
+	2:
+		IF	fbPayloadCarrier.GetPayload(pPayloadAReceiver,PAYLOAD_A)
+			THEN
+			
+			step := 3;
+		END_IF
+		
+	3:	
+		
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

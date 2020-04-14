@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="Payload_Carrier" Id="{1fa36593-3ecc-43fd-a15b-6576771ee199}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Payload_Carrier 
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	aPayloads : ARRAY[1..PAYLOAD_TYPE_SIZE-1] OF I_Payload;
+	//iPayload : I_Payload;
+	ePayloadType : E_Payload_Type;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetPayload" Id="{529fe2e9-48db-47b1-b9db-042c523f458f}">
+      <Declaration><![CDATA[METHOD GetPayload : BOOL
+VAR_IN_OUT
+	pByte : POINTER TO BYTE;
+END_VAR
+
+VAR_INPUT
+	ePayloadType : E_Payload_Type;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*
+IF 	THIS^.ePayloadType = ePayloadType
+	THEN
+		GetPayload :=  __QUERYPOINTER(iPayload, pByte);
+END_IF
+*)
+
+
+IF 	aPayloads[ePayloadType] <> 0
+	THEN
+		GetPayload :=  __QUERYPOINTER(aPayloads[ePayloadType], pByte);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetPayload" Id="{1ada05a6-5913-4254-88a8-7e46ea56218a}">
+      <Declaration><![CDATA[METHOD SetPayload : BOOL
+VAR_INPUT
+	iPayload : I_Payload; 
+	ePayloadType : E_Payload_Type;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*
+IF ePayloadType <> NO_PAYLOAD
+	THEN
+	
+	THIS^.iPayload := iPayload;
+	THIS^.ePayloadType := ePayloadType;
+	
+	SetPayload := TRUE;
+	
+END_IF
+*)
+
+IF ePayloadType <> NO_PAYLOAD
+	THEN
+	
+	THIS^.aPayloads[ePayloadType] := iPayload;
+	
+	SetPayload := TRUE;
+	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="Payload_Carrier">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="Payload_Carrier.GetPayload">
+      <LineId Id="36" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="2" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+    <LineIds Name="Payload_Carrier.SetPayload">
+      <LineId Id="22" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="23" Count="5" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="11" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

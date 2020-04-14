@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <Itf Name="I_Payload_A" Id="{2c5c1cf3-5b02-47c9-adb4-4fba19f1e938}">
+    <Declaration><![CDATA[INTERFACE I_Payload_A EXTENDS I_Payload
+]]></Declaration>
+  </Itf>
+</TcPlcObject>
