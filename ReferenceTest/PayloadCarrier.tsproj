@@ -10,7 +10,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{A5E59131-4D79-4177-B533-08943012C629}" Name="PayloadCarrier" PrjFilePath="PayloadCarrier\PayloadCarrier.plcproj" TmcFilePath="PayloadCarrier\PayloadCarrier.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ReferenceTest\ReferenceTest.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PayloadCarrier\PayloadCarrier.tmc">
 					<Name>PayloadCarrier Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<TaskPouOids>

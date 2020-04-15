@@ -17,6 +17,9 @@
     <LibraryReferences>{f505f7a7-f96a-45f7-9c05-40f9fe52d683}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\E_PAYLOAD_CARRIER_MODE.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_Payload_Type.TcDUT">
       <SubType>Code</SubType>
     </Compile>

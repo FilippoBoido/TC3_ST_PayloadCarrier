@@ -5,13 +5,14 @@
 VAR
 	
 	fbPayloadA : Payload_A;
+	pPayloadA : POINTER TO Payload_A;
 	fbPayloadB : Payload_B;
 	fbPayloadCarrier : Payload_Carrier;
 	rPayloadAReceiver : REFERENCE TO Payload_A;
 	pPayloadAReceiver : POINTER TO Payload_A;
 	fbPayloadAReceiver : Payload_A;
 	pPayloadBReceiver : POINTER TO Payload_B;
-	
+	iPayload : I_Payload;
 	step : INT;
 	
 END_VAR
@@ -24,22 +25,56 @@ fbPayloadB();
 CASE step OF
 	
 	1:
-		IF 	fbPayloadCarrier.SetPayload(fbPayloadA,PAYLOAD_A)
+	
+		IF 	fbPayloadCarrier.SetPayload(fbPayloadA,PAYLOAD_A,ONE_TO_ONE)
 			THEN
 			
 			step := 2;
 		END_IF
 		
-	
 	2:
+	
 		IF	fbPayloadCarrier.GetPayload(pPayloadAReceiver,PAYLOAD_A)
 			THEN
 			
 			step := 3;
 		END_IF
 		
-	3:	
+	3:
+	
+	4:
+
+		fbPayloadCarrier.ResetPayload();
 		
+	10:
+	
+		pPayloadA := __NEW(PAYLOAD_A);
+		IF 	fbPayloadCarrier.SetPayload(pPayloadA^,PAYLOAD_A,ONE_TO_ONE)
+			THEN
+			
+			step := 11;
+		END_IF
+		
+	11:
+	
+		IF	fbPayloadCarrier.GetPayload(pPayloadAReceiver,PAYLOAD_A)
+			THEN
+			
+			step := 12;
+		END_IF
+		
+	12:
+	
+	13:
+	
+		__DELETE(pPayloadA);
+		step := 14;
+		
+	14:
+		
+	15:
+
+		fbPayloadCarrier.ResetPayload();	
 		
 END_CASE]]></ST>
     </Implementation>
@@ -50,21 +85,42 @@ END_CASE]]></ST>
       <LineId Id="12" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="15" Count="0" />
+      <LineId Id="113" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="55" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="51" Count="0" />
-      <LineId Id="18" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="112" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="61" Count="1" />
       <LineId Id="60" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="22" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="107" Count="1" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="110" Count="0" />
       <LineId Id="26" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="81" Count="3" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="96" Count="0" />
       <LineId Id="28" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="87" Count="3" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="93" Count="1" />
+      <LineId Id="98" Count="6" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="95" Count="0" />
       <LineId Id="16" Count="0" />
     </LineIds>
   </POU>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="E_PAYLOAD_CARRIER_MODE" Id="{7e150f33-76dd-4434-b39c-aeb1b7684e4e}">
+    <Declaration><![CDATA[TYPE E_PAYLOAD_CARRIER_MODE :
+(
+	NO_PAYLOAD_CARRIER_MODE := 0,
+	ONE_TO_ONE := 10,
+	ONE_TO_MANY := 15,
+	SHARED := 50,
+	RESTRICTED := 55
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
