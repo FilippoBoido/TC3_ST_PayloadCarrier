@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <GVL Name="Global" Id="{e05dedbf-06be-4664-9b7f-45382800bf03}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	fbPayloadCarrier : PayloadCarrier;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

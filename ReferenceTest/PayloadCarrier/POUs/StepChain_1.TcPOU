@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="StepChain_1" Id="{f737c90b-0d93-4659-9531-9886105b95f1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK StepChain_1
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbSynchPayload : SynchPayload;
+	step : UINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE step OF
+	
+	0:
+		IF 	fbPayloadCarrier
+				.SetPayload(
+					fbSynchPayload,
+					SYNCH_PAYLOAD,
+					ONE_TO_ONE,
+					THIS
+				)	
+			THEN
+			
+			step := 10;
+		END_IF
+		
+	10:
+	
+		fbSynchPayload.bReleaseRequest := TRUE;
+		IF 	fbSynchPayload.bReleaseRequestReceived
+			THEN
+			fbSynchPayload.bReleaseRequest := FALSE;
+			step := 20;
+		END_IF
+		
+	20:
+		IF  fbSynchPayload.bRequestAck
+			THEN
+			fbSynchPayload.bRequestAckReceived := TRUE;
+			step := 30;
+		END_IF
+		
+	30:	
+
+		fbSynchPayload.bRequestAckReceived := FALSE;
+		step := 40;
+		
+	40:
+	
+		fbPayloadCarrier.ResetPayload(THIS);
+		step := 50;
+		
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="StepChain_1">
+      <LineId Id="10" Count="2" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="77" Count="3" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="15" Count="6" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="66" Count="3" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="71" Count="4" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="94" Count="4" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

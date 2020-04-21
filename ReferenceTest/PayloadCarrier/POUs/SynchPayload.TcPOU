@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="SynchPayload" Id="{0e6a2093-0152-4d23-96c0-2e9d1b1cc9da}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SynchPayload IMPLEMENTS I_Payload
+VAR_INPUT
+	bReleaseRequest : BOOL;
+	bReleaseRequestReceived : BOOL;
+	bRequestAck : BOOL;
+	bRequestAckReceived : BOOL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="SynchPayload">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

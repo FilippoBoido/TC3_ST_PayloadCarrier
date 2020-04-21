@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
-  <POU Name="Payload_Carrier" Id="{1fa36593-3ecc-43fd-a15b-6576771ee199}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Payload_Carrier 
+  <POU Name="PayloadCarrier" Id="{1fa36593-3ecc-43fd-a15b-6576771ee199}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PayloadCarrier 
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -15,6 +15,7 @@ VAR
 	bLock : BOOL;
 	bPayloadAssigned : BOOL;
 	ePayloadCarrierMode : E_PAYLOAD_CARRIER_MODE;
+	pResetKey : POINTER TO BYTE;
 END_VAR
 VAR CONSTANT
 	cSizeOfGarbageCollection : UINT := 10 * ( PAYLOAD_TYPE_SIZE-1 );
@@ -70,6 +71,7 @@ END_IF]]></ST>
     <Method Name="ResetPayload" Id="{8009174e-f750-493d-a294-b9ad8b678f7e}">
       <Declaration><![CDATA[METHOD ResetPayload : BOOL
 VAR_INPUT
+	pResetKey : POINTER TO BYTE;
 END_VAR
 VAR
 	i: UINT;
@@ -77,6 +79,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF 	nGarbageCollectionCounter > 0
+	AND pResetKey = THIS^.pResetKey
 	THEN
 	
 	FOR i := 1 TO nGarbageCollectionCounter DO
@@ -105,6 +108,7 @@ VAR_INPUT
 	iPayload : I_Payload; 
 	ePayloadType : E_Payload_Type;
 	ePayloadCarrierMode : E_PAYLOAD_CARRIER_MODE;
+	pResetKey : POINTER TO BYTE;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -123,8 +127,10 @@ END_IF
 IF 	ePayloadType <> NO_PAYLOAD
 	AND ePayloadCarrierMode <> NO_PAYLOAD_CARRIER_MODE
 	AND bLock = FALSE
+	AND pResetKey <> 0
 	THEN
 	
+	this^.pResetKey := pResetKey;
 	bLock := TRUE;
 	
 	THIS^.ePayloadCarrierMode := ePayloadCarrierMode;
@@ -137,10 +143,10 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="Payload_Carrier">
+    <LineIds Name="PayloadCarrier">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="Payload_Carrier.GetPayload">
+    <LineIds Name="PayloadCarrier.GetPayload">
       <LineId Id="36" Count="0" />
       <LineId Id="28" Count="1" />
       <LineId Id="31" Count="0" />
@@ -170,8 +176,10 @@ END_IF
       <LineId Id="52" Count="0" />
       <LineId Id="26" Count="0" />
     </LineIds>
-    <LineIds Name="Payload_Carrier.ResetPayload">
-      <LineId Id="24" Count="1" />
+    <LineIds Name="PayloadCarrier.ResetPayload">
+      <LineId Id="24" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="25" Count="0" />
       <LineId Id="27" Count="2" />
       <LineId Id="32" Count="0" />
       <LineId Id="30" Count="0" />
@@ -187,7 +195,7 @@ END_IF
       <LineId Id="26" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="Payload_Carrier.SetPayload">
+    <LineIds Name="PayloadCarrier.SetPayload">
       <LineId Id="22" Count="0" />
       <LineId Id="13" Count="1" />
       <LineId Id="18" Count="0" />
@@ -199,7 +207,9 @@ END_IF
       <LineId Id="23" Count="2" />
       <LineId Id="41" Count="0" />
       <LineId Id="39" Count="0" />
+      <LineId Id="52" Count="0" />
       <LineId Id="26" Count="1" />
+      <LineId Id="53" Count="0" />
       <LineId Id="40" Count="0" />
       <LineId Id="42" Count="1" />
       <LineId Id="28" Count="0" />

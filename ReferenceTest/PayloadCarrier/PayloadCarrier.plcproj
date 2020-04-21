@@ -23,6 +23,13 @@
     <Compile Include="DUTs\E_Payload_Type.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ST_SynchPayload.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\Global.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -38,7 +45,7 @@
     <Compile Include="POUs\I_Payload_B.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Payload_Carrier.TcPOU">
+    <Compile Include="POUs\PayloadCarrier.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Payload_A.TcPOU">
@@ -48,6 +55,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Payload_B.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\StepChain_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\StepChain_2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\SynchPayload.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

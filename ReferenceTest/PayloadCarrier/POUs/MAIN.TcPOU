@@ -4,10 +4,13 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	
+	fbStepChain_1 : StepChain_1;
+	fbStepChain_2 : StepChain_2;
+	
 	fbPayloadA : Payload_A;
 	pPayloadA : POINTER TO Payload_A;
 	fbPayloadB : Payload_B;
-	fbPayloadCarrier : Payload_Carrier;
+	
 	rPayloadAReceiver : REFERENCE TO Payload_A;
 	pPayloadAReceiver : POINTER TO Payload_A;
 	fbPayloadAReceiver : Payload_A;
@@ -19,9 +22,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbPayloadCarrier();
-fbPayloadA();
-fbPayloadB();
+//fbPayloadA();
+//fbPayloadB();
 
+fbStepChain_1();
+fbStepChain_2();
+
+(*
 CASE step OF
 	
 	1:
@@ -76,11 +83,14 @@ CASE step OF
 
 		fbPayloadCarrier.ResetPayload();	
 		
-END_CASE]]></ST>
+END_CASE
+*)]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
       <LineId Id="10" Count="1" />
+      <LineId Id="134" Count="2" />
+      <LineId Id="133" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="27" Count="0" />
@@ -122,6 +132,7 @@ END_CASE]]></ST>
       <LineId Id="105" Count="0" />
       <LineId Id="95" Count="0" />
       <LineId Id="16" Count="0" />
+      <LineId Id="132" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="StepChain_2" Id="{81aeb190-d86d-4cd6-b9ec-10df5d75d2cc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK StepChain_2
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	pSynchPayload : POINTER TO SynchPayload;
+	step : UINT;
+	timer : TON;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[timer(PT:= T#4S);
+IF 	pSynchPayload = 0
+	THEN
+	
+	step := 0;
+END_IF
+
+CASE step OF
+	
+	0:
+		IF 	fbPayloadCarrier.GetPayload(pSynchPayload,SYNCH_PAYLOAD)
+			THEN
+			
+			step := 10;
+		END_IF
+		
+	10:
+	
+		IF 	pSynchPayload^.bReleaseRequest
+			THEN
+			
+			pSynchPayload^.bReleaseRequestReceived := TRUE;
+			step := 20;
+		END_IF
+		
+	20:
+		pSynchPayload^.bReleaseRequestReceived := FALSE;
+		timer.IN := TRUE;
+		IF  timer.Q
+			THEN
+			timer.IN := FALSE;
+			pSynchPayload^.bRequestAck := TRUE;
+			step := 30;
+		END_IF
+		
+	30:	
+
+		IF 	pSynchPayload^.bRequestAckReceived
+			THEN
+			pSynchPayload^.bRequestAck := FALSE;
+			step := 40;
+		END_IF
+	
+	40:;
+		
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="StepChain_2">
+      <LineId Id="105" Count="1" />
+      <LineId Id="117" Count="4" />
+      <LineId Id="64" Count="10" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="99" Count="4" />
+      <LineId Id="81" Count="1" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="85" Count="4" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="93" Count="1" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

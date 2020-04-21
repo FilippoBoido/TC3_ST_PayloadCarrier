@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="ST_SynchPayload" Id="{394424f0-e18c-42ac-98a0-79b5e17dbc55}">
+    <Declaration><![CDATA[TYPE ST_SynchPayload :
+STRUCT
+	bReleaseRequest : BOOL;
+	bReleaseRequestReceived : BOOL;
+	bRequestAck : BOOL;
+	bRequestAckReceived : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
