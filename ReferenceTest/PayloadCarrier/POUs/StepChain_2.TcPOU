@@ -8,6 +8,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	pSynchPayload : POINTER TO SynchPayload;
+	
 	step : UINT;
 	timer : TON;
 END_VAR
